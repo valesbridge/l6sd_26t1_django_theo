@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Notice - Mini Noticeboard{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">⚠️ Delete Notice?</h4>
+            <p>Are you sure you want to delete this notice? This action cannot be undone.</p>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ notice.title }}</h5>
+                <p class="card-text">{{ notice.content|truncatewords:30 }}</p>
+                <p class="notice-author">by {{ notice.author }}</p>
+                <p class="text-muted"><small>Created: {{ notice.created_at|date:"F d, Y \a\t H:i" }}</small></p>
+            </div>
+        </div>
+        
+        <div class="mt-4">
+            <form method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-lg">🗑️ Yes, Delete This Notice</button>
+            </form>
+            <a href="{% url 'notice_detail' notice.id %}" class="btn btn-secondary btn-lg">❌ Cancel</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

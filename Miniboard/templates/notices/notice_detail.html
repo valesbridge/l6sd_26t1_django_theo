@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ notice.title }} - Mini Noticeboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card notice-card {% if notice.is_pinned %}pinned{% endif %}">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <h1 class="card-title mb-2">{{ notice.title }}</h1>
+                        {% if notice.is_pinned %}
+                            <span class="badge badge-pinned">📌 Pinned Notice</span>
+                        {% endif %}
+                    </div>
+                    <div class="btn-group" role="group">
+                        <a href="{% url 'edit_notice' notice.id %}" class="btn btn-primary">✏️ Edit</a>
+                        <a href="{% url 'delete_notice' notice.id %}" class="btn btn-danger">🗑️ Delete</a>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <div class="notice-meta mb-3">
+                    <p class="mb-2">
+                        <strong>Author:</strong> <span class="notice-author">{{ notice.author }}</span>
+                    </p>
+                    <p class="mb-2">
+                        <strong>Posted:</strong> {{ notice.created_at|date:"F d, Y \a\t H:i" }}
+                    </p>
+                    {% if notice.updated_at != notice.created_at %}
+                        <p>
+                            <strong>Last Updated:</strong> {{ notice.updated_at|date:"F d, Y \a\t H:i" }}
+                        </p>
+                    {% endif %}
+                </div>
+                
+                <hr>
+                
+                <div class="notice-content mt-4 mb-4">
+                    {{ notice.content|linebreaks }}
+                </div>
+                
+                <hr>
+                
+                <div class="mt-3">
+                    <a href="{% url 'home' %}" class="btn btn-secondary">← Back to Notices</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Notice Info</h5>
+                <dl class="row">
+                    <dt class="col-sm-5">Status:</dt>
+                    <dd class="col-sm-7">
+                        {% if notice.is_pinned %}
+                            <span class="badge bg-info">Pinned</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Regular</span>
+                        {% endif %}
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Actions</h5>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'edit_notice' notice.id %}" class="btn btn-outline-primary">Edit Notice</a>
+                    <a href="{% url 'delete_notice' notice.id %}" class="btn btn-outline-danger">Delete Notice</a>
+                    <a href="{% url 'create_notice' %}" class="btn btn-outline-success">Create New</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

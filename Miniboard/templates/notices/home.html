@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Mini Noticeboard{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Welcome to Mini Noticeboard</h1>
+    <p>Stay updated with the latest campus notices and announcements</p>
+    <a href="{% url 'create_notice' %}" class="btn btn-warning btn-lg">Post a Notice</a>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <h2 class="mb-4">Recent Notices</h2>
+        
+        {% if notices %}
+            {% for notice in notices %}
+                <div class="card notice-card {% if notice.is_pinned %}pinned{% endif %}">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="flex-grow-1">
+                                <h5 class="card-title">
+                                    {{ notice.title }}
+                                    {% if notice.is_pinned %}
+                                        <span class="badge badge-pinned">📌 Pinned</span>
+                                    {% endif %}
+                                </h5>
+                                <p class="notice-author">by {{ notice.author }}</p>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <a href="{% url 'notice_detail' notice.id %}" class="btn btn-sm btn-info">View</a>
+                                <a href="{% url 'edit_notice' notice.id %}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{% url 'delete_notice' notice.id %}" class="btn btn-sm btn-danger">Delete</a>
+                            </div>
+                        </div>
+                        
+                        <p class="card-text">{{ notice.content|truncatewords:30 }}</p>
+                        
+                        <div class="notice-meta">
+                            <small>
+                                📅 Posted on {{ notice.created_at|date:"M d, Y \a\t H:i" }}
+                                {% if notice.updated_at != notice.created_at %}
+                                    | Updated on {{ notice.updated_at|date:"M d, Y \a\t H:i" }}
+                                {% endif %}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">No Notices Yet!</h4>
+                <p>There are no notices to display. <a href="{% url 'create_notice' %}">Create one now!</a></p>
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Quick Stats</h5>
+                <ul class="list-unstyled">
+                    <li><strong>Total Notices:</strong> {{ notices|length }}</li>
+                    <li><strong>Pinned:</strong> 
+                        {{ notices|dictsort:"is_pinned"|length }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">✨ Tips</h5>
+                <ul class="small">
+                    <li>Pin important notices to keep them at the top</li>
+                    <li>Edit or delete your notices anytime</li>
+                    <li>Keep notices concise and informative</li>
+                    <li>Check back regularly for updates</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

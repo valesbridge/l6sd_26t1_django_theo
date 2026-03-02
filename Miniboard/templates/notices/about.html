@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}About - Mini Noticeboard{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <h1 class="mb-4">About Mini Noticeboard</h1>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">📋 What is Mini Noticeboard?</h5>
+                <p class="card-text">
+                    Mini Noticeboard is a simple yet powerful web application designed for sharing campus updates 
+                    and important notices with the community. Whether you need to announce events, share important 
+                    deadlines, or post general updates, Mini Noticeboard makes it easy.
+                </p>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">✨ Key Features</h5>
+                <ul>
+                    <li><strong>Easy Notice Creation:</strong> Post notices with just a title, content, and author name</li>
+                    <li><strong>Pin Important Notices:</strong> Mark urgent notices to keep them at the top</li>
+                    <li><strong>Edit Anytime:</strong> Update your notices even after posting</li>
+                    <li><strong>Delete Option:</strong> Remove notices you no longer need</li>
+                    <li><strong>Clean Interface:</strong> Beautiful, user-friendly design</li>
+                    <li><strong>Timestamp Tracking:</strong> See when notices were posted and updated</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">🚀 How It Works</h5>
+                <ol>
+                    <li>Click "New Notice" to create a post</li>
+                    <li>Enter your notice title and content</li>
+                    <li>Provide your name or organization</li>
+                    <li>Optionally pin the notice if it's important</li>
+                    <li>Submit and your notice goes live immediately</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">🎓 Technical Stack</h5>
+                <p class="card-text">
+                    <strong>Backend:</strong> Django (Python web framework)<br>
+                    <strong>Database:</strong> SQLite<br>
+                    <strong>Frontend:</strong> Bootstrap 5, HTML5, CSS3<br>
+                    <strong>Architecture:</strong> Model-View-Template (MVT) pattern
+                </p>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">💡 Why This Project?</h5>
+                <p class="card-text">
+                    Mini Noticeboard demonstrates core Django concepts in a practical application:
+                </p>
+                <ul>
+                    <li>URL routing and view functions</li>
+                    <li>Template rendering with context</li>
+                    <li>Database models and migrations</li>
+                    <li>Form handling and validation</li>
+                    <li>Django ORM queries</li>
+                    <li>Admin interface</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">📝 Quick Tips</h5>
+                <ul>
+                    <li>Use the admin panel (admin/) for managing notices with more control</li>
+                    <li>Pinned notices automatically float to the top</li>
+                    <li>You can edit and update notices after posting</li>
+                    <li>Share notices with your community for better engagement</li>
+                    <li>Keep notices updated for accurate information</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="alert alert-info mt-4">
+            <h5>🤝 Get Started</h5>
+            <p class="mb-0">
+                Ready to post? <a href="{% url 'create_notice' %}" class="alert-link">Create your first notice now!</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
